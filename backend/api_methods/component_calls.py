@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 
 
 def cam_viz(product_array) -> BytesIO:
-    # handle connection
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']
     collection = db['OnlineRetail']
@@ -22,7 +21,8 @@ def cam_viz(product_array) -> BytesIO:
         {"$group":
              {"_id": "$CustomerID",
               "total_spending": {"$sum": {"$multiply": ["$Quantity", "$UnitPrice"]}},
-              "occurrences": {"$sum": 1}}
+              "occurrences": {"$sum": 1},
+              "Description": {"$addToSet": "$Description"}}
          }
     ]
     # Run query and load results to a dataframe
@@ -30,18 +30,23 @@ def cam_viz(product_array) -> BytesIO:
     df = pd.DataFrame(cursor)
 
     # Data Cleaning Remove outlier-> Good for demo, bad for product
-   # df.drop(df['total_spending'].idxmax(), inplace=True)
+    # df.drop(df['total_spending'].idxmax(), inplace=True)
 
-    # given query, create scatterplot
+    # Given query, create scatterplot
     plt.figure(figsize=(6, 4))
-    plt.scatter(df['occurrences'], df['total_spending'])
+
+    # If product_array length is greater than 0, encode Description as color
+    if len(product_array) > 1:
+        plt.scatter(df['occurrences'], df['total_spending'],  c=df['Description'].apply(lambda x: hash(tuple(x))))
+    else:
+        plt.scatter(df['occurrences'], df['total_spending'])
 
     # Labeling
     plt.title('Unique Customer Profiles: Transactions vs Total Spending')
     plt.xlabel('Number of Transactions')
     plt.ylabel('Total Spending, in British Pounds Sterling')
 
-    # fix y axis [0, max + 10% max]
+    # Fix y-axis [0, max + 10% max]
     plt.ylim(0, max(df['total_spending'] + 0.1 * max(df['total_spending'])))
 
     # Save the plot to a BytesIO object
@@ -52,10 +57,11 @@ def cam_viz(product_array) -> BytesIO:
     return figfile
 
 
+# Legacy test method from API dev
 def cam_test(test_str: str) -> str:
     return test_str + " returned"
 
-
+# Gets the unique countries from our dataset
 def countries() -> list[str]:
     '''
     Gets the unique countries
@@ -68,6 +74,7 @@ def countries() -> list[str]:
     client.close()
     return unique_countries
 
+# Gets unique products from dataset
 def unique_descriptions() -> list[str]:
     '''
     Gets the unique product descriptions
@@ -82,6 +89,7 @@ def unique_descriptions() -> list[str]:
     return unique_lowered
 
 
+# gets unique years from the dataset
 def years() -> list[str]:
     '''
     Gets the unique years from the dataset
@@ -109,6 +117,7 @@ def total_transactions() -> int:
     return total_count
 
 
+# Gets total number of transactions
 def total_sales() -> int:
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']

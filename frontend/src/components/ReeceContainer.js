@@ -71,7 +71,7 @@ const ReeceContainer = () => {
   return (
     <div className="container">
       <div className="header">
-        <h1>Reece's Graph Title</h1>
+        <h1>Top Selling Products Year Over Year</h1>
       </div>
       <div className="visBox">
       <div className="dropdown-menu">

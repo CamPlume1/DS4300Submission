@@ -71,7 +71,7 @@ const TomContainer = () => {
   return (
     <div className="container">
       <div className="header">
-        <h1>Tom's Graph Title</h1>
+        <h1>Monthly Sales By Region</h1>
       </div>
       <div className="visBox">
       <div className="dropdown-menu">

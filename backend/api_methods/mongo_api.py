@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import numpy as np
 
+
 # Extracts data via mongo and returns a dictionary where each month lists the total spending by country
 def spending_by_month_and_country():
 
@@ -240,11 +241,11 @@ def best_selling_products(year) -> BytesIO:
         {
             '$group': {
                 '_id': "$Description",
-                'TotalQuantity': { '$sum': "$Quantity" }
+                'TotalQuantity': {'$sum': "$Quantity"}
             }
         },
         {
-            '$sort': { "TotalQuantity": -1 }
+            '$sort': {"TotalQuantity": -1}
         },
         {
             '$limit': 10

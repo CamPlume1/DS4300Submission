@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../ImageContainer.css'; // Import CSS file
 
+/*
+Component for displaying customer profiles.
+Created for Cam Plume
+ */
 const ImageComponent = ({ selectedOption }) => {
   const [imageSrc, setImageSrc] = useState('');
 
@@ -72,7 +76,7 @@ const handleOptionChange = (event) => {
   return (
     <div className="container">
       <div className="header">
-        <h1>Customer Profiles: Number of Transactions vs Total Revenue</h1>
+        <h1>Customer Profiles: Number of Transactions vs Total Revenue by Customer</h1>
       </div>
       <div className="visBox">
       <div className="multiple-drop">
