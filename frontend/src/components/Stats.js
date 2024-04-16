@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './stats.css';
-/* Created by Cam Plume */
+/*
+Component for overall dataset statistics
+Created by Cam Plume
+ */
 
 const Stats = () => {
   const [transactions, setTransactions] = useState('');

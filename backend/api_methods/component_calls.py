@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # Created by Cam Plume
 
-
+# creates vis for customer sales profiles
 def cam_viz(product_array) -> BytesIO:
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']
@@ -142,7 +142,7 @@ def total_sales() -> int:
     client.close()
     return sales_total
 
-
+# Gets total units sold
 def total_units() -> int:
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']
@@ -162,7 +162,7 @@ def total_units() -> int:
     client.close()
     return sales_total
 
-
+# Gets most frequent unit sold
 def top_unit() -> str:
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']
@@ -183,7 +183,7 @@ def top_unit() -> str:
     client.close()
     return top_description
 
-
+# Gets top unit by revenue
 def top_unit_rev() -> str:
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']
@@ -207,7 +207,7 @@ def top_unit_rev() -> str:
     client.close()
     return top_description
 
-
+# Gets top country by quantity sold
 def top_country() -> str:
     client = MongoClient('localhost', 27017)
     db = client['OnlineRetail']

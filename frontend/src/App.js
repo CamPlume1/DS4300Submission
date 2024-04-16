@@ -5,7 +5,11 @@ import TomContainer from "./components/TomContainer";
 import ReeceContainer from "./components/ReeceContainer";
 import Stats from "./components/Stats";
 import CamContainer from "./components/CamContainer";
+/*
 
+Main App Framework
+Created by Cam Plume
+ */
 function App() {
   return (
      <div className="App">

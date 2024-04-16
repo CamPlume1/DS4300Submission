@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../ImageContainer.css'; // Import CSS file
 
+/*
+Component for individual country analysis
+Created by Cam Plume
+ */
 const ImageComponent = ({ selectedOption }) => {
   const [imageSrc, setImageSrc] = useState('');
 
